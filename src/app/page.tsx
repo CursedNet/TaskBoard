@@ -29,7 +29,8 @@ export default async function Home() {
         Promise.all([getCursedNet(), getCursedNetRepos(), getCursedWeb(), getTaskBoard()])
             .then(function (results: any) {
                 for (let k = 0; k < results.length; k++) {
-                    let card: any = document.getElementById('card_fetch')
+                    let card: any = document.getElementById('card_block')
+/*
                     card.insertAdjacentHTML('afterbegin', `
                                 <a href="${results[1].data[k].html_url}">
                                     <li class='list'>
@@ -42,6 +43,7 @@ export default async function Home() {
                                     </li>
                                 </a>
                                     `)
+ */
                     fetch(`https://api.github.com/repos/CursedNet/${results[1].data[k].name}/issues`)
                         .then((response) => {
                             return response.json();
@@ -131,7 +133,6 @@ export default async function Home() {
                                 }
 
                                 block.insertAdjacentHTML("afterbegin", `
-                                    <div>
                                         <div class="card_container">
                                             <div class="card">
                                                 <div class="date_container">
@@ -168,7 +169,6 @@ export default async function Home() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                    `)
                                 let el: any = document.getElementById('progress')
 
@@ -330,65 +330,10 @@ export default async function Home() {
 
     return (
         <div className='home'>
-            <div className='sidebar'>
-                <div className='sidebar_content'>
-                    <div className='border_list'>
-                        <ul className='list_content'>
-                            <li className='list'>
-                                <a href='https://github.com/CursedNet'>
-                                    <div className='content_list'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="none"
-                                             stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-                                             strokeLinejoin="round"
-                                             className="lucide lucide-home">
-                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                            <polyline points="9 22 9 12 15 12 15 22"/>
-                                        </svg>
-                                        <div className='font_sidebar'>
-                                            &nbsp;&nbsp;Home
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li className='list'>
-                                <a href='https://github.com/orgs/CursedNet/people'>
-                                    <div className='content_list'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                             strokeLinejoin="round" className="lucide lucide-building-2">
-                                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
-                                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
-                                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
-                                            <path d="M10 6h4"/>
-                                            <path d="M10 10h4"/>
-                                            <path d="M10 14h4"/>
-                                            <path d="M10 18h4"/>
-                                        </svg>
-                                        <div className='font_sidebar'>
-                                            &nbsp;&nbsp;Company
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className='border_list'>
-                        <ul className='list_content'>
-                            <div className='list_specification'>
-                                Projects
-                            </div>
-                            <div id='card_fetch'>
-
-                            </div>
-                        </ul>
-                    </div>
+            <div className='d'>
+                <div id='nodes-container' className="container">
+                    <div className='grid_content' id='card_block'></div>
                 </div>
-            </div>
-            <div id='nodes-container' className="container">
-                <div className='grid_content' id='card_block'></div>
             </div>
         </div>
     )
