@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import {Octokit} from "octokit";
 
 
-import Authorization from "@/Authorization";
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Create Next App',
