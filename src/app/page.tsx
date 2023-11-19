@@ -25,6 +25,7 @@ export default async function Home() {
             return axios.get('https://api.github.com/orgs/CursedNet');
         }
 
+
         Promise.all([getCursedNet(), getCursedNetRepos(), getCursedWeb(), getTaskBoard()])
             .then(function (results: any) {
                 for (let k = 0; k < results.length; k++) {
@@ -189,7 +190,7 @@ export default async function Home() {
 
                 }
             })
-        
+
         Promise.all([getTaskBoard()])
             .then(function (results) {
 
