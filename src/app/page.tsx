@@ -10,7 +10,7 @@ export default async function Home() {
 
     useEffect(() => {
         function getTaskBoard() {
-            return axios.get('https://api.github.com/repos/Devollox/TaskBoard/issues');
+            return axios.get('https://api.github.com/repos/Devollox/TaskBoardOld/issues');
         }
 
         function getCursedWeb() {
@@ -25,10 +25,8 @@ export default async function Home() {
             return axios.get('https://api.github.com/orgs/CursedNet');
         }
 
-
         Promise.all([getCursedNet(), getCursedNetRepos(), getCursedWeb(), getTaskBoard()])
             .then(function (results: any) {
-
                 for (let k = 0; k < results.length; k++) {
                     let card: any = document.getElementById('card_fetch')
                     card.insertAdjacentHTML('afterbegin', `
@@ -191,7 +189,7 @@ export default async function Home() {
 
                 }
             })
-
+        
         Promise.all([getTaskBoard()])
             .then(function (results) {
 
