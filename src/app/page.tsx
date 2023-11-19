@@ -52,7 +52,7 @@ export default async function Home() {
                         .then((results: any) => {
 
 
-                            for (let p = 0; p < 2; p++) {
+                            for (let p = 0; p < results.length; p++) {
                                 let block: any = document.getElementById('card_block')
 
                                 if (results[p] === undefined) {
