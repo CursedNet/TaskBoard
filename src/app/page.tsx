@@ -190,6 +190,7 @@ export default async function Home() {
                 }
             })
 
+        /*
         Promise.all([getTaskBoard()])
             .then(function (results) {
                 let block: any = document.getElementById('card_block')
@@ -324,9 +325,11 @@ export default async function Home() {
                     }
 
                 }
-
             })
+
+         */
     }, []);
+
 
     return (
         <div className='home'>
