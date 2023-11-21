@@ -9,37 +9,17 @@ import axios from "axios";
 export default async function Home() {
 
     useEffect(() => {
-        function getTaskBoard() {
-            return axios.get('https://api.github.com/repos/Devollox/TaskBoardOld/issues');
-        }
-
-        function getCursedWeb() {
-            return axios.get('https://api.github.com/repos/CursedNet/CursedWeb/issues');
-        }
-
-        function getCursedNetRepos() {
+        function getCursedNet() {
             return axios.get('https://api.github.com/orgs/CursedNet/repos');
         }
-
-        function getCursedNet() {
-            return axios.get('https://api.github.com/orgs/CursedNet');
-        }
-
-
-        Promise.all([getCursedNet(), getCursedNetRepos(), getCursedWeb(), getTaskBoard()])
+        Promise.all([getCursedNet()])
             .then(function (results: any) {
-                for (let k = 0; k < results.length; k++) {
-                    let card: any = document.getElementById('card_block')
-                    fetch(`https://api.github.com/repos/CursedNet/${results[1].data[k].name}/issues`)
+                for (let k = 0; k < results[0].data.length; k++) {
+                    fetch(`https://api.github.com/repos/CursedNet/${results[0].data[k].name}/issues`)
                         .then((response) => {
                             return response.json();
                         })
-                        .catch(() => {
-                            console.log("error")
-                        })
                         .then((results: any) => {
-
-
                             for (let p = 0; p < results.length; p++) {
                                 let block: any = document.getElementById('card_block')
 
@@ -58,46 +38,43 @@ export default async function Home() {
                                     'Full-stack': '4B0082',
                                     'NoBilling': 'c3c3c2',
                                     'Development': '3e6f47',
-                                    'Error': 'B22222'
+                                    'Error': 'B22222',
+                                    'Fix': '008080'
                                 };
 
-                                const regExp = /\*|Full-stack: |Back-end: |Front-end: |NoBilling: |Development: |Database: |UX\/UI: |:\$/g;
+                                const regExp = /\*|Fix: |Full-stack: |Back-end: |Front-end: |NoBilling: |Development: |Database: |UX\/UI: |:\$/g;
 
                                 let handlertTextSpecification = getTitleRepos.replace(regExp, '')
+
                                 let date = results[p].created_at
                                 let options: any = {
                                     day: 'numeric',
                                 }
 
-                                let optionsMonday: any = {
-                                    month: 'numeric',
-                                }
+                                let optionsMonday: any = { month: 'numeric' };
+
                                 let getDateDay = function (str: any) {
                                     let date = new Date(str);
-                                    return date.toLocaleString('ru', options)
+                                    return date.toLocaleString('ru', options);
                                 }
 
                                 let getDateMonday = function (str: any) {
                                     let date = new Date(str);
-                                    return date.toLocaleString('ru', optionsMonday)
+                                    return date.toLocaleString('ru', optionsMonday);
                                 }
 
-                                if (textSpecification === 'NoBilling') {
-                                    textSpecification = 'No Billing'
-                                }
-
-                                let arrSpecification = ['Database', 'Front-end', 'Back-end', 'Full-stack', 'No Billing', 'Development', 'UX/UI',];
-                                let elementSpecification = textSpecification
+                                if (textSpecification === 'NoBilling') textSpecification = 'No Billing';
+                                let arrSpecification = ['Database', 'Front-end', 'Back-end', 'Full-stack', 'No Billing', 'Development', 'UX/UI', 'Fix'];
+                                let elementSpecification = textSpecification;
 
                                 let contains = function (arr: any, elem: any) {
                                     return arr.indexOf(elem) !== -1;
                                 }
 
-                                const specification = (s: any) => s.split(': ').slice(1).join(': ')
-
                                 if (!contains(arrSpecification, elementSpecification)) {
-                                    textSpecification = 'Error'
+                                    textSpecification = 'Error';
                                 }
+
 
                                 const dateMonths: any = {
                                     1: 'Jan',
@@ -114,9 +91,8 @@ export default async function Home() {
                                     12: 'Dec'
                                 }
 
-                                if (specification(`${getTitleRepos}`) === '') {
-                                    textSpecification = 'No Billing'
-                                }
+                                const specification = (entity: any) => entity.split(': ').slice(1).join(': ');
+                                if (specification(`${getTitleRepos}`) === '') textSpecification = 'No Billing';
 
                                 block.insertAdjacentHTML("afterbegin", `
                                         <div class="card_container">
@@ -172,15 +148,16 @@ export default async function Home() {
                                 );
                             }
                         })
-
                 }
+            })
+            .catch(function (err) {
+                console.log('API GITHUB ERROR!', {err})
             })
     }, []);
 
-
     return (
         <div className='home'>
-            <div className='d'>
+            <div className='grid_container'>
                 <div id='nodes-container' className="container">
                     <div className='grid_content' id='card_block'></div>
                 </div>

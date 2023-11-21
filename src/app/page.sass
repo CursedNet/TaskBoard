@@ -10,6 +10,7 @@
 
   background-color: #27282c
   border-radius: 0.8rem
+
 ::-webkit-scrollbar
   overflow: hidden
 
@@ -17,6 +18,7 @@ body
   overflow-x: hidden
   background-color: #1b1c20
   width: 100%
+
 .card
   margin-left: 30px
   margin-top: 15px
@@ -35,6 +37,7 @@ body
   width: fit-content
   border-radius: 0.2rem
   font-size: 14px
+
 .cube
   display: flex
   margin: 4px 7px 4px 7px
@@ -125,21 +128,27 @@ body
 
 .grid_content
   margin-top: 25px
+
+
+
+.grid_content
+  justify-content: center
   display: grid
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))
-.d
+  grid-column-gap: 1px
+  grid-template-areas: var(--grid-template)
 
-  justify-content: center
-  display: flex
 .home
-  display: var(--display)
+  display: flex
   justify-content: center
-
-@media (min-width: 650px)
+@media (min-width: 1200px)
   :root
-    --display: inline
-
-@media (max-width: 580px)
+    --grid-template: 'a a a a'
+@media (max-width: 1200px)
   :root
-    --display: grid
-
+    --grid-template: 'a a a'
+@media (max-width: 880px)
+  :root
+    --grid-template: 'a a'
+@media (max-width: 600px)
+  :root
+    --grid-template: 'a'
