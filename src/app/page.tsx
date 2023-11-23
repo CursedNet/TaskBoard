@@ -55,7 +55,7 @@ export default async function Home() {
                                 }
 
                                 let upperCase: string = apiText[0].name.replace(apiText[0].name[0], apiText[0].name[0].toUpperCase())
-
+                                
                                 block.insertAdjacentHTML("afterbegin", `
                                 <div class="card_container">
                                     <div class="card">
@@ -67,7 +67,7 @@ export default async function Home() {
                                             <div class="date_container_time">
                                                 ${getDate(date)[1]}
                                                 <div class="dateMonth">
-                                                    ${dateMonths(date)}
+                                                    ${dateMonths[getDate(date)[0]]}
                                                 </div>
                                             </div>
                                         </div>
