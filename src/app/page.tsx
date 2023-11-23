@@ -39,24 +39,19 @@ export default async function Home() {
                                     return [date.toLocaleString('ru', optionsTime.optionsMonth), date.toLocaleString('ru', optionsTime.optionsDay)]
                                 }
 
-                                function data<T>(prop: T) {
-
-                                    const dateMonths: any = {
-                                        1: 'Jan',
-                                        2: 'Feb',
-                                        3: 'Mar',
-                                        4: 'Apr',
-                                        5: 'May',
-                                        6: 'Jun',
-                                        7: 'Jul',
-                                        8: 'Aug',
-                                        9: 'Sep',
-                                        10: 'Oct',
-                                        11: 'Nov',
-                                        12: 'Dec'
-                                    }
-
-                                    return dateMonths[prop]
+                                const dateMonths: any = {
+                                    1: 'Jan',
+                                    2: 'Feb',
+                                    3: 'Mar',
+                                    4: 'Apr',
+                                    5: 'May',
+                                    6: 'Jun',
+                                    7: 'Jul',
+                                    8: 'Aug',
+                                    9: 'Sep',
+                                    10: 'Oct',
+                                    11: 'Nov',
+                                    12: 'Dec'
                                 }
 
                                 let upperCase: string = apiText[0].name.replace(apiText[0].name[0], apiText[0].name[0].toUpperCase())
@@ -72,7 +67,7 @@ export default async function Home() {
                                             <div class="date_container_time">
                                                 ${getDate(date)[1]}
                                                 <div class="dateMonth">
-                                                    ${data(getDate(date)[0])}
+                                                    ${dateMonths(date)}
                                                 </div>
                                             </div>
                                         </div>
